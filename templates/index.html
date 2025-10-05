@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Flask App</title>
+</head>
+<body>
+  <h1>Welcome to My To-Do App</h1>
+<ul>
+  {% for task in tasks %}
+    <li>
+      <strong>{{task.head}}</strong>
+      <br>
+      {{task.body}}
+    </li>
+    {% else %}
+    <li>No task yet. Add new</li>
+    {% endfor%}
+</ul>
+  <form action="/add" method="post">
+    <input type="text" name="head" id="" placeholder="heading" required>
+    <input type="text" name="body" id="" placeholder="content" required>
+    <button type="submit">add</button>
+  </form>
+</body>
+</html>
+ 
