@@ -1,26 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Flask App</title>
+  <meta charset="UTF-8">
+  <title>Flask To-Do List</title>
 </head>
 <body>
-  <h1>Welcome to My To-Do App</h1>
-<ul>
-  {% for task in tasks %}
-    <li>
-      <strong>{{task.head}}</strong>
-      <br>
-      {{task.body}}
-    </li>
-    {% else %}
-    <li>No task yet. Add new</li>
-    {% endfor%}
-</ul>
+  <h1>📝 My To-Do List</h1>
+
+  <!-- Add Task Form -->
   <form action="/add" method="post">
-    <input type="text" name="head" id="" placeholder="heading" required>
-    <input type="text" name="body" id="" placeholder="content" required>
-    <button type="submit">add</button>
+    <label>Heading:</label><br>
+    <input type="text" name="heading" placeholder="Enter heading" required><br><br>
+
+    <label>Content:</label><br>
+    <textarea name="content" placeholder="Enter content" required></textarea><br><br>
+
+    <button type="submit">Add Task</button>
   </form>
+
+  <hr>
+
+  <!-- Display Tasks -->
+  <h2>My Tasks:</h2>
+  <ul>
+    {% for task in tasks %}
+      <li>
+        <strong>{{ task.heading }}</strong><br>
+        {{ task.content }} <br>
+        <small>Added on: {{ task.date_created.strftime('%Y-%m-%d %H:%M') }}</small>
+        <br>
+        <a href="/delete/{{ task.id }}" onclick="return confirm('Delete this task?')">🗑️ Delete</a>
+      </li>
+      <hr>
+    {% else %}
+      <li>No tasks yet. Add one above!</li>
+    {% endfor %}
+  </ul>
+
 </body>
 </html>
- 
